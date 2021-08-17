@@ -1,3 +1,5 @@
+import {stopPlayer, stopPlay} from './audioPlayer.js';
+
 export const radioPlayerInit = () => {
   console.log('Zello');
 
@@ -11,6 +13,23 @@ export const radioPlayerInit = () => {
     const audio = new Audio();
     audio.type = 'audio/aac';
 
+    stopPlayer(audio, radioStop, radio);
+
+    // function stopPlayer(mediaElem) {
+    //   const tabs = document.querySelectorAll('.player-btn');
+    //   tabs.forEach(tab => {
+    //     tab.addEventListener('click', () => {
+    //       tabs.forEach(tab => {
+    //         if (!tab.classList.contains('active') && !mediaElem.paused) {
+    //           mediaElem.pause();
+    //           togglePlayStop();
+    //         }
+    //       });
+    //     });
+    //   });
+    // }
+    // stopPlayer(audio);
+
     function togglePlayStop() {
       if (audio.paused) {
         radio.classList.remove('play');
@@ -21,12 +40,12 @@ export const radioPlayerInit = () => {
         radioStop.classList.remove('fa-play');
         radioStop.classList.add('fa-stop');
       }
-    };
+    }
 
     function selectStation(element) {
       radioItem.forEach(item => item.classList.remove('select'));
       element.classList.add('select');
-    };
+    }
 
     radioStop.disabled = true;
 
@@ -55,4 +74,5 @@ export const radioPlayerInit = () => {
       }
       togglePlayStop();
     });
+
 };

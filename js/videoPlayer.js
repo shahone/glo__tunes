@@ -1,3 +1,5 @@
+import {stopPlayer, stopPlay} from './audioPlayer.js';
+
 export const videoPlayerInit = () => {
   console.log('Yello');
 
@@ -7,6 +9,24 @@ export const videoPlayerInit = () => {
     videoTimePassed = document.querySelector('.video-time__passed'),
     videoProgress = document.querySelector('.video-progress'),
     videoTimeTotal = document.querySelector('.video-time__total');
+
+    stopPlayer(videoPlayer, videoButtonPlay);
+
+  // function stopPlayer(mediaElem) {
+  //   const tabs = document.querySelectorAll('.player-btn');
+  //   tabs.forEach(tab => {
+  //     tab.addEventListener('click', () => {
+  //       tabs.forEach(tab => {
+  //         if (!tab.classList.contains('active') && !mediaElem.paused) {
+  //           mediaElem.pause();
+  //           videoButtonPlay.classList.remove('fa-pause');
+  //           videoButtonPlay.classList.add('fa-play');
+  //         }
+  //       });
+  //     });
+  //   });
+  // }
+  // stopPlayer(videoPlayer);
 
   function toggleIcon() {
     if (videoPlayer.paused) {

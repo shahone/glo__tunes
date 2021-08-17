@@ -1,4 +1,28 @@
-export const audioPlayerInit = () => {
+function stopPlayer(mediaElem, button, block) {
+  const tabs = document.querySelectorAll('.player-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(tab => {
+        if (!tab.classList.contains('active') && !mediaElem.paused) {
+          stopPlay(mediaElem, button, block);
+        }
+      });
+    });
+  });
+}
+
+
+function stopPlay(mediaElem, btn, block) {
+  mediaElem.pause();
+  btn.classList.add('fa-play');
+  btn.classList.remove('fa-pause', 'fa-stop');
+  console.log(btn);
+  if (block) {
+    block.classList.remove('play');
+  }
+}
+
+const audioPlayerInit = () => {
   const audio = document.querySelector('.audio'),
         audioImg = document.querySelector('.audio-img'),
         audioHeader = document.querySelector('.audio-header'),
@@ -13,6 +37,8 @@ export const audioPlayerInit = () => {
   const playlist = ['hello', 'flow', 'speed'];
   let trackIndex = 0;
 
+  stopPlayer(audioPlayer, audioButtonPlay, audio);
+
   function loadTrack() {
     const isPlayed = audioPlayer.paused;
     const track = playlist[trackIndex];
@@ -25,7 +51,7 @@ export const audioPlayerInit = () => {
     } else {
       audioPlayer.play();
     }
-  };
+  }
 
   function nextTrack() {
     if (trackIndex === playlist.length - 1) {
@@ -33,7 +59,7 @@ export const audioPlayerInit = () => {
     } else {
       trackIndex++;
     }
-  };
+  }
 
   const addZero = n => n < 10 ? '0' + n : n;
 
@@ -98,6 +124,6 @@ export const audioPlayerInit = () => {
       audioPlayer.currentTime = progress;
   });
 
-
-
 };
+
+export {audioPlayerInit, stopPlayer, stopPlay};
